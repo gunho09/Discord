@@ -1,13 +1,11 @@
 import discord
 from discord.ext import commands
 import os
-from dotenv import load_dotenv
 import google.generativeai as genai
 import asyncio
 
-# .env 파일에서 환경 변수 로드
-load_dotenv()
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+# 환경 변수에서 디스코드 봇 토큰 로드
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # 제미나이 클라이언트 초기화
@@ -102,7 +100,7 @@ async def ask_pro(ctx, *, question: str):
     await generate_gemini_response(ctx, question, pro_model, pro_conversations)
 
 # 봇 실행
-if DISCORD_TOKEN:
-    bot.run(DISCORD_TOKEN)
+if DISCORD_BOT_TOKEN:
+    bot.run(DISCORD_BOT_TOKEN)
 else:
-    print("디스코드 봇 토큰이 .env 파일에 설정되지 않았습니다.")
+    print("디스코드 봇 토큰(DISCORD_BOT_TOKEN)이 환경 변수에 설정되지 않았습니다.")
